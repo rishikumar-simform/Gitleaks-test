@@ -18,7 +18,9 @@ jobs:
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
-          args: detect --source . --report-path gitleaks-report.json --exit-code 1
+          args: detect --source . --report-path gitleaks-report.json --exit-code 1 \
+            --commit-from ${{ github.event.pull_request.base.sha }} \
+            --commit-to ${{ github.event.pull_request.head.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
