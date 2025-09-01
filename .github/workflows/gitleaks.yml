@@ -7,30 +7,18 @@ on:
 
 jobs:
   gitleaks-scan:
-    name: Run Gitleaks on PR changes
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   
+          fetch-depth: 0
 
-      - name: Run Gitleaks on PR diff
-        id: gitleaks
-        run: |
-          echo "🔎 Running Gitleaks on PR changes..."
-          # Scan only the diff between PR head and base
-          gitleaks detect \
-            --source . \
-            --report-path gitleaks-report.json \
-            --exit-code 1 \
-            --no-git \
-            --log-level debug \
-            --redact \
-            --report-format json \
-            --commit-from $(git merge-base origin/${{ github.base_ref }} HEAD) \
-            --commit-to HEAD
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          args: detect --source . --report-path gitleaks-report.json --exit-code 1
 
       - name: Upload Gitleaks Report
         if: always()
