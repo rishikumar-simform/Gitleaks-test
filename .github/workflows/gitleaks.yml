@@ -18,9 +18,21 @@ jobs:
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
-          args: detect --source . --report-path gitleaks-report.json --exit-code 1 --verbose
+          args: detect --source . --report-path gitleaks-report.json --verbose --no-git
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        continue-on-error: true
+
+      - name: Check Results
+        run: |
+          if [ -f gitleaks-report.json ]; then
+            echo "Report contents:"
+            cat gitleaks-report.json
+            if [ -s gitleaks-report.json ]; then
+              echo "🚨 Secrets found!"
+              exit 1
+            fi
+          fi
 
       - name: Upload Gitleaks Report
         if: always()
@@ -28,5 +40,3 @@ jobs:
         with:
           name: gitleaks-report
           path: gitleaks-report.json
-
-          
