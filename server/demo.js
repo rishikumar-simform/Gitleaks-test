@@ -12,3 +12,7 @@ console.log("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTYiLCJyb2
 
 
 console.log("S3_ACCESS_KEY_ID=AKIAXXX ")
+const AWS_config = {
+    accessKeyId: "AKIAEXAMPLE123456",
+    secretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+}
