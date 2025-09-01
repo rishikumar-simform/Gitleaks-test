@@ -20,7 +20,7 @@ jobs:
         with:
           args: detect --source . --report-path gitleaks-report.json --exit-code 1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Upload Gitleaks Report
         if: always()
