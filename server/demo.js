@@ -22,3 +22,4 @@ const AZURE={
     AZURE_SUBSCRIPTION_ID="12345678-90ab-cdef-1234-567890abcdef"
 }
 console.log(AZURE)
+console.log("hello this is the secrets")
