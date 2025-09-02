@@ -24,7 +24,7 @@ jobs:
         with:
           args: detect --source . --report-path gitleaks-default-report.json --exit-code 1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       # 2️⃣ Run Gitleaks with custom rules
       - name: Run Gitleaks (Custom Rules)
@@ -33,7 +33,7 @@ jobs:
         with:
           args: detect --config-path .github/gitleaks/gitleaks.toml --source . --report-path gitleaks-custom-report.json --exit-code 1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       # 3️⃣ Upload both reports as artifacts
       - name: Upload Gitleaks Reports
