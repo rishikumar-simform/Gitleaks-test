@@ -25,7 +25,7 @@ jobs:
           args: detect --source . --report-path gitleaks-default-report.json --exit-code 1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        continue-on-error: false   # ❌ Fail immediately if secrets are found
+        continue-on-error: false 
 
       # Upload report as artifact
       - name: Upload Gitleaks Report
