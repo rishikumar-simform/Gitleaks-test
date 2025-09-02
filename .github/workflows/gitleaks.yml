@@ -17,23 +17,27 @@ jobs:
         with:
           fetch-depth: 0
 
-  # 1️⃣ Run Gitleaks with default rules
+      # 1️⃣ Run Gitleaks with default rules (don’t fail immediately)
       - name: Run Gitleaks (Default Rules)
+        id: gitleaks-default
+        continue-on-error: true
         uses: gitleaks/gitleaks-action@v2
         with:
           args: detect --source . --report-path gitleaks-default-report.json --exit-code 1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-      # 2️⃣ Run Gitleaks with custom config
+      # 2️⃣ Run Gitleaks with custom config (don’t fail immediately)
       - name: Run Gitleaks (Custom Rules)
+        id: gitleaks-custom
+        continue-on-error: true
         uses: gitleaks/gitleaks-action@v2
         with:
           args: detect --config-path .github/gitleaks/gitleaks.toml --source . --report-path gitleaks-custom-report.json --exit-code 1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-      # 3️⃣ Upload reports as artifacts (optional but useful for debugging)
+      # 3️⃣ Upload reports (optional)
       - name: Upload Gitleaks Reports
         uses: actions/upload-artifact@v4
         with:
@@ -41,3 +45,10 @@ jobs:
           path: |
             gitleaks-default-report.json
             gitleaks-custom-report.json
+
+      # 4️⃣ Fail job if either scan failed
+      - name: Check results
+        if: steps.gitleaks-default.outcome == 'failure' || steps.gitleaks-custom.outcome == 'failure'
+        run: |
+          echo "❌ Gitleaks scan failed. Check reports for details."
+          exit 1
