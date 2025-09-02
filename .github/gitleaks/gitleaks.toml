@@ -1,0 +1,13 @@
+title = "Custom Gitleaks Config"
+
+[[rules]]
+id = "custom-secret-key"
+description = "Detects MY_SECRET_KEY hardcoded in code"
+regex = '''(?i)MY_SECRET_KEY\s*=\s*['"][A-Za-z0-9+/=]{10,}['"]'''
+tags = ["custom", "test"]
+
+[[rules]]
+id = "custom-aws-key"
+description = "Detects AWS Access Key IDs (starting with AKIA)"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["aws", "credentials"]
