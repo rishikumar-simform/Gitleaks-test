@@ -39,7 +39,5 @@ jobs:
       - name: Upload Gitleaks Reports
         uses: actions/upload-artifact@v4
         with:
-          name: gitleaks-reports
-          path: |
-            gitleaks-default-report.json
-            gitleaks-custom-report.json
+          name: gitleaks-custom-report
+          path: gitleaks-custom-report.json
