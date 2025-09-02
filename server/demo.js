@@ -16,3 +16,4 @@ const AWS_config = {
     accessKeyId: "AKIAEXAMPLE123456",
     secretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }
+console.log("S3_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY ")
