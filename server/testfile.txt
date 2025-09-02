@@ -1,0 +1,3 @@
+jwt_secret_key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTYiLCJyb2xlIjoiYWRtaW4ifQdBjftJeZ4CVP-mB92K27uhbU'
+sendgrid_api_key='SG.r4nd0mDummYteStKeY1234567890.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi"
+database_url='postgresql://user:password@localhost:5432/mydatabase'
