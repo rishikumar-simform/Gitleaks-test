@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 1️⃣ Run Gitleaks with default rules
+      # Run Gitleaks with default rules
       - name: Run Gitleaks (Default Rules)
         id: gitleaks-default
         uses: gitleaks/gitleaks-action@v2
@@ -25,32 +25,67 @@ jobs:
           args: detect --source . --report-path gitleaks-default-report.json --exit-code 1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        continue-on-error: true   # ✅ ensures pipeline continues
+        continue-on-error: false   # ❌ Fail immediately if secrets are found
 
-      # 2️⃣ Run Gitleaks with custom rules
-      - name: Run Gitleaks (Custom Rules)
-        id: gitleaks-custom
-        uses: gitleaks/gitleaks-action@v2
-        with:
-          args: detect --config-path .github/gitleaks/gitleaks.toml --source . --report-path gitleaks-custom-report.json --exit-code 1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        continue-on-error: true   # ✅ ensures this also runs even if fails
-
-      # 3️⃣ Upload both reports as artifacts
-      - name: Upload Gitleaks Reports
+      # Upload report as artifact
+      - name: Upload Gitleaks Report
         uses: actions/upload-artifact@v4
         with:
-          name: gitleaks-reports
-          path: |
-            gitleaks-default-report.json
-            gitleaks-custom-report.json
+          name: gitleaks-report
+          path: gitleaks-report.json
+# name: Gitleaks Secret Scan
 
-      # 4️⃣ Fail job if any scan failed
-      - name: Check if scans failed
-        run: |
-          if [ "${{ steps.gitleaks-default.outcome }}" == "failure" ] || \
-             [ "${{ steps.gitleaks-custom.outcome }}" == "failure" ]; then
-            echo "❌ One or more Gitleaks scans failed."
-            exit 1
-          fi
+# on:
+#   pull_request:
+#     branches:
+#       - develop
+#     types: [opened, reopened, synchronize, ready_for_review]
+
+# jobs:
+#   gitleaks-scan:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       # Checkout repository
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+
+#       # 1️⃣ Run Gitleaks with default rules
+#       - name: Run Gitleaks (Default Rules)
+#         id: gitleaks-default
+#         uses: gitleaks/gitleaks-action@v2
+#         with:
+#           args: detect --source . --report-path gitleaks-default-report.json --exit-code 1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+#         continue-on-error: true   # ✅ ensures pipeline continues
+
+#       # 2️⃣ Run Gitleaks with custom rules
+#       - name: Run Gitleaks (Custom Rules)
+#         id: gitleaks-custom
+#         uses: gitleaks/gitleaks-action@v2
+#         with:
+#           args: detect --config-path .github/gitleaks/gitleaks.toml --source . --report-path gitleaks-custom-report.json --exit-code 1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+#         continue-on-error: true   # ✅ ensures this also runs even if fails
+
+#       # 3️⃣ Upload both reports as artifacts
+#       - name: Upload Gitleaks Reports
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: gitleaks-reports
+#           path: |
+#             gitleaks-default-report.json
+#             gitleaks-custom-report.json
+
+#       # 4️⃣ Fail job if any scan failed
+#       - name: Check if scans failed
+#         run: |
+#           if [ "${{ steps.gitleaks-default.outcome }}" == "failure" ] || \
+#              [ "${{ steps.gitleaks-custom.outcome }}" == "failure" ]; then
+#             echo "❌ One or more Gitleaks scans failed."
+#             exit 1
+#           fi
