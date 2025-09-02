@@ -1,3 +1,4 @@
 Azure Key: "O2zT7hNhW9qL1aE9CrhTeA3aP7XJ9o5Z9zX6xM5mH3hF6Q0pY5jQ9A=="
 JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.signature123
 Generic API Key: "my_secret_api_key_1234567890"
+GCP API Key: AIzaSyD-1234567890abcdefghijklmnopqrstuvwx
