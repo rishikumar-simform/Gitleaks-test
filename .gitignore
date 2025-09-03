@@ -1,2 +1,6 @@
 .env
 test.txt
+Gitleaks-test.git.bfg-report/*
+Gitleaks-test.git/*
+Gitleaks-test.git
+Gitleaks-test.git.bfg-report
