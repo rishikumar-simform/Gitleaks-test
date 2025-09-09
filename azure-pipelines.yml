@@ -15,7 +15,7 @@ stages:
       - job: GitleaksScan
         displayName: "Run Gitleaks Secret Scan"
         pool:
-          vmImage: ubuntu-latest
+          name: Subitup   
 
         steps:
           - checkout: self
