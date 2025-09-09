@@ -2,3 +2,4 @@ console.log("This is a demo file.");
 console.log("Just for testing purposes.");
 // ❌ Example of a hardcoded secret (fake, for testing scanners)
 const AWS_SECRET_KEY = "AKIA1234567890FAKEKEYEXAMPLE";
+const GOOGLE_API_KEY = "AIzaSyD-1234567890abcdef1234567890abcdef";
